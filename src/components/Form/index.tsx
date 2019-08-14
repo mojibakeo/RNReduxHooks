@@ -1,21 +1,24 @@
 import React from 'react';
-import {useFormHooks} from './hooks';
-import styles from './styles';
 import {View, TextInput} from 'react-native';
+import {FormHooks} from './hooks';
+import styles from './styles';
 
-export default function Form() {
-  const state = useFormHooks('sample text');
+interface Props {
+  state: FormHooks;
+}
+
+export default function Form(props: Props) {
   return React.useMemo(
     () => (
       <View style={styles.wrapper}>
         <TextInput
           placeholder="you can fill text"
           style={styles.input}
-          value={state.value}
-          onChangeText={state.update}
+          value={props.state.value}
+          onChangeText={props.state.update}
         />
       </View>
     ),
-    [state.value],
+    [props.state.value],
   );
 }
